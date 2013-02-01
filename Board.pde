@@ -23,21 +23,28 @@ class Board {
     boardHeight = myBoardHeight;
     
     territories = new Territory[boardWidth][boardHeight];
-    
-    for(int i = 0; i < boardWidth; i++){
-      for(int j = 0; j < boardHeight; j++){
-        territories[i][j] = new Territory(parent,
-          DisplayManager.BOARD_START_X + (i * DisplayManager.TERRITORY_WIDTH),       //x
-          DisplayManager.BOARD_START_Y + (j * DisplayManager.TERRITORY_HEIGHT),      //y
-          DisplayManager.TERRITORY_WIDTH,                                            //width
-          DisplayManager.TERRITORY_HEIGHT);                                         //height
-          
-      }
-    }
- }
+    createTerritories(boardWidth, boardHeight);
+
+  }
   
   public int getBoardWidth(){  return boardWidth; }
   
   public int getBoardHeight(){  return boardHeight; }
   
+  public Territory[][] getTerritories() {  return territories; }
+  
+  //Sets up the territories. Called as part of the constructor. 
+ private void createTerritories(int myBoardWidth, int myBoardHeight) {
+    
+   //Creates Territories in the territories array, assigning each a position and size as they are instantiated.
+   for(int i = 0; i < boardWidth; i++){
+     for(int j = 0; j < boardHeight; j++){
+       territories[i][j] = new Territory(parent,
+         DisplayCentral.BOARD_START_X + (i * DisplayCentral.TERRITORY_WIDTH),       //x
+         DisplayCentral.BOARD_START_Y + (j * DisplayCentral.TERRITORY_HEIGHT),      //y
+         DisplayCentral.TERRITORY_WIDTH,                                            //width
+         DisplayCentral.TERRITORY_HEIGHT);                                          //height       
+       }
+     } 
+   }
 }

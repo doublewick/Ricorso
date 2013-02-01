@@ -6,39 +6,43 @@
  * DisplayManager handles display.
  */
  
-class DisplayManager extends HObject {
-
-  final static int TERRITORY_WIDTH = 50;     //The width of a given Territory (assuming they are rectangles)
-  final static int TERRITORY_HEIGHT = 50;    //The height of a given Territory (assuming they are rectangles)
-  
-  final static int BOARD_START_X = 50;       //The x value of the top left corner of the top left Territory
-  final static int BOARD_START_Y = 100;      //The x value of the top left corner of the top left Territory
+class DisplayManager {
 
   private Ricorso parent;
   
+  private boolean graphicsChange;            //Only redraw the screen if something has changed
+  
   private Game game;
+  private DisplayCentral dc;
+  private DisplayTopbar dt;
+  private DisplayBattle db;
   
   public DisplayManager(Ricorso p) {
-   parent = p;
+    parent = p;
+    graphicsChange = true;                   //Initialize to true so the screen draws once
   }
+  
+  //Call this ANY TIME a graphics change is required; otherwise the screen will not redraw
+  public void graphicsChange() {  graphicsChange = true; }
   
   public void display() {
-    parent.background(250);
-    game.getCurrentLevel().draw();
-    displayTerritories(game.getCurrentBoard()); 
-    //[display topbar]
-  }
-   
-  public void setGame(Game myGame){  game = myGame; }  
-
-  //Displays all the Territories on the current board.
-  private void displayTerritories(Board currentBoard) {
     
-    for(int i = 0; i < currentBoard.getBoardWidth(); i++) {
-      for(int j = 0; j < currentBoard.getBoardHeight(); j++) {
-        currentBoard.territories[i][j].draw();
-      } 
+    if(graphicsChange){         //ONLY CALL IF SOMETHING HAS CHANGED
+    
+      graphicsChange = false;  //Reset graphicsChanged before doing anything else
+      
+      dc.display();             //Central display
+      dt.display();             //Topbar display
+      db.display();             //Battle display
     }
   }
+   
+  public void setGame(Game myGame){  game = myGame; }
   
- }
+  public void setDisplays(Game myGame) {
+    dc = new DisplayCentral(parent, myGame);
+    dt = new DisplayTopbar(parent, myGame);
+    db = new DisplayBattle(parent, myGame);
+  }
+ 
+}

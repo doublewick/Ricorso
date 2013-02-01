@@ -9,20 +9,29 @@
  class GameLevel {
   
   private Ricorso parent;
+
   private Board board;
   private ArrayList<Player> players;
+  private int currentPlayerIndex;               //Which player's turn it is
   
-  public GameLevel(Ricorso p, ArrayList<Player> myPlayers, int myWidth, int myHeight) {
+  public GameLevel(Ricorso p, int myWidth, int myHeight) {
     super();
     parent = p;
     board = new Board(parent, myWidth, myHeight);
-    players = myPlayers;
+    
+    currentPlayerIndex = -1;         //Dummy value - call setCurrentPlayer to the first player
   }
-
-  public Board getBoard() {  return board; }
   
-  public void draw() {
- 
-  }
+  //CALL THIS WHEN GAMELEVEL IS CREATED
+  public void setPlayers(ArrayList<Player> myPlayers) { players = myPlayers; }
+  
+  public ArrayList<Player> getPlayers() {  return players; }
+  
+  //Sets player who is going now
+  public void setCurrentPlayerIndex(int i) {  currentPlayerIndex = i; }
+    
+  public int getCurrentPlayerIndex() {  return currentPlayerIndex; }
+    
+  public Board getBoard() {  return board; }
   
 }
