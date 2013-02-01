@@ -12,14 +12,13 @@
 
   private Board board;
   private ArrayList<Player> players;
-  private int currentPlayerIndex;               //Which player's turn it is
+  private int currentPlayerIndex;      //Which player's turn it is
   
-  public GameLevel(Ricorso p, int myWidth, int myHeight) {
+  public GameLevel(Ricorso p) {
     super();
     parent = p;
-    board = new Board(parent, myWidth, myHeight);
     
-    currentPlayerIndex = -1;         //Dummy value - call setCurrentPlayer to the first player
+    currentPlayerIndex = -1;           //Dummy value - call setCurrentPlayer to the first player
   }
   
   //CALL THIS WHEN GAMELEVEL IS CREATED
@@ -31,7 +30,9 @@
   public void setCurrentPlayerIndex(int i) {  currentPlayerIndex = i; }
     
   public int getCurrentPlayerIndex() {  return currentPlayerIndex; }
-    
+  
+  public void setBoard(Board myBoard) {  board = myBoard; }
+  
   public Board getBoard() {  return board; }
   
 }
