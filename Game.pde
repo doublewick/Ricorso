@@ -57,6 +57,9 @@ class Game {
     LevelSetupManager lsm = new LevelSetupManager(parent, this);   //Used to set up the first GameLevel
     lsm.setupGameLevel(players, 0);                                //Sets up first GameLevel
     lsm.setupBoard(gameLevels.get(0), 4, 3);                       //Sets board for first GameLevel
+    
+    GameFlowManager gfm = new GameFlowManager(parent, this);       //Used to handle game flow
+    gfm.runGame();                                                 //Gets the game going
   }
      
 }

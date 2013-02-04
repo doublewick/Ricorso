@@ -9,6 +9,7 @@
 import java.util.ArrayList;
 import java.awt.Color;
 import processing.core.PImage;
+import processing.core.PFont;
 
 class DisplayTopbar {
    
@@ -27,21 +28,27 @@ class DisplayTopbar {
   final static int CURRENT_PLAYER_ICON_X_OFFSET = 5;             //The offset between the right edge of a player's icon and the current player icon
   final static int CURRENT_PLAYER_ICON_Y_OFFSET = 3;             //The offset between the top edge of a player's icon and the current player icon
   
+  final static int REINFORCEMENTS_X_OFFSET = 9;
+  final static int REINFORCEMENTS_Y_OFFSET = 23;
+  
   
   private Ricorso parent;
   
   private Game game;
-   
+
   private PImage currentPlayerIcon;
+  private PFont reinforcementsFont;
    
   public DisplayTopbar(Ricorso p, Game myGame) {
      parent = p;
      game = myGame;
      
      //Load current player icon
-     
      currentPlayerIcon = parent.loadImage("sword.png");
-  }
+     
+     //Set up reinforcements font
+     reinforcementsFont = parent.createFont("Calibri", 20);
+}
   
   public void display() {
     drawTopbar();
@@ -67,15 +74,24 @@ class DisplayTopbar {
     
     for(int i = 0; i < players.size(); i++) {
       
-      //Just draw a rectangle in their color for now
+      //For now, just draw a circle in the player's color
       
       parent.stroke(0);
       parent.fill(players.get(i).getColor().getRGB());
-      parent.rect(  TOPBAR_X + FIRST_PLAYER_X_OFFSET + (BETWEEN_PLAYERS_X_OFFSET * i),   //x
-                    TOPBAR_Y + PLAYER_Y_OFFSET,                                          //y
-                    30,                                                                  //width
-                    30);                                                                 //height               
-    }
+      parent.ellipseMode(parent.CORNER);
+      parent.ellipse(  TOPBAR_X + FIRST_PLAYER_X_OFFSET + (BETWEEN_PLAYERS_X_OFFSET * i),   //x
+                       TOPBAR_Y + PLAYER_Y_OFFSET,                                          //y
+                       30,                                                                  //width
+                       30);                                                                 //height               
+    
+    //Also draw the player's reinforcements
+    
+    parent.fill(0);
+    parent.text(  GameRules.getReinforcements(players.get(i), game.getCurrentLevel()),                                //text
+                  TOPBAR_X + FIRST_PLAYER_X_OFFSET + (BETWEEN_PLAYERS_X_OFFSET * i + REINFORCEMENTS_X_OFFSET),        //x
+                  TOPBAR_Y + PLAYER_Y_OFFSET + REINFORCEMENTS_Y_OFFSET);                                              //y
+
+    }   
   }
   
   //Draws something showing whose turn it is.
@@ -86,7 +102,6 @@ class DisplayTopbar {
                     TOPBAR_X + FIRST_PLAYER_X_OFFSET + (30) + (BETWEEN_PLAYERS_X_OFFSET * currentPlayerIndex) + CURRENT_PLAYER_ICON_X_OFFSET,  //x
                     TOPBAR_Y + PLAYER_Y_OFFSET + CURRENT_PLAYER_ICON_Y_OFFSET);                                                                //y
   }
-  
 }  
 
 

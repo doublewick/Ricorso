@@ -50,4 +50,8 @@ import java.util.Random;
   }
   
   public Random getRandom(){  return r; }
+  
+  //Call this ANY TIME a graphics change is required; otherwise the screen will not redraw
+  public void graphicsChange() {  dm.graphicsChange(); }
+ 
  

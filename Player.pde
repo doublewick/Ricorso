@@ -21,9 +21,9 @@ class Player {
     playerColor = myColor;
   }
    
-  public String getName(){  return name; }
+  public String getName() {  return name; }
      
-  public int getCurrentLevelIndex(){  return currentLevelIndex; }
+  public int getCurrentLevelIndex() {  return currentLevelIndex; }
   
   public void setCurrentLevelIndex(int i) {  currentLevelIndex = i; }
    

@@ -19,17 +19,17 @@ class DisplayManager {
   
   public DisplayManager(Ricorso p) {
     parent = p;
-    graphicsChange = true;                   //Initialize to true so the screen draws once
+    graphicsChange = true;      //Initialize to true so the screen draws once
   }
   
-  //Call this ANY TIME a graphics change is required; otherwise the screen will not redraw
+  //Call this ANY TIME a graphics change is required, otherwise the screen will not redraw; can be called from Ricorso
   public void graphicsChange() {  graphicsChange = true; }
   
   public void display() {
     
     if(graphicsChange){         //ONLY CALL IF SOMETHING HAS CHANGED
     
-      graphicsChange = false;  //Reset graphicsChanged before doing anything else
+      graphicsChange = false;   //Reset graphicsChanged before doing anything else
       
       dc.display();             //Central display
       dt.display();             //Topbar display

@@ -30,6 +30,8 @@ class DisplayCentral {
      parent = p;
      game = myGame;
      
+     //Set up unit font
+     
      unitFont = parent.createFont("Calibri", 24);
   }
   
@@ -56,7 +58,10 @@ class DisplayCentral {
      * Uses RGB values from the Color of the player indexed at this territory's ownerIndex in this GameLevel's player list (got that?)
      * This should basically just work, but if it starts causing problems we can separate it out into a couple lines to make things clearer
      */
-    parent.fill(game.getCurrentLevel().getPlayers().get(t.getOwnerIndex()).getColor().getRGB());
+    if(t.isSelected())
+      parent.fill(255);
+    else  
+      parent.fill(game.getCurrentLevel().getPlayers().get(t.getOwnerIndex()).getColor().getRGB());
     
     //Draw the territory as a rectangle
     parent.rect(t.x,t.y,t.width,t.height); 

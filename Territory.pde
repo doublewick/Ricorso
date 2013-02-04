@@ -18,7 +18,7 @@ class Territory {
   private int ownerIndex;    //The index of the player who owns this Territory
   private int units;        //The number of units in this Territory
   
-  private boolean active;  //Whether the Territory has been clicked on by its owner
+  private boolean selected;  //Whether the Territory has been clicked on by its owner
    
   public Territory(Ricorso p, int myX, int myY, int myWidth, int myHeight) {
       parent = p;
@@ -26,6 +26,8 @@ class Territory {
       y = myY;
       width = myWidth;
       height = myHeight;
+      
+      selected = false;
   }
    
   /**
@@ -39,6 +41,12 @@ class Territory {
   public int getUnits() {  return units; }
   
   public void setUnits(int myUnits) {  units = myUnits; }
+  
+  public void select() {  selected = true; }
+  
+  public void deselect() {  selected = false; }
+  
+  public boolean isSelected() {  return selected; }
   
   //Adds a single unit. Used during setup and when providing reinforcements.
   public void addUnit() {  units++; }
