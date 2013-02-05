@@ -53,11 +53,19 @@
     parent.graphicsChange();
   }
  
-  //Handles an attack from t1 into t2.
-  //This could be pushed to GameRules, but it's simple enough to keep here for now.
-  public void attack(Territory t1, Territory t2) {
+  //Handles an attack from attacker into defender with the rolls given.
+  public void battle(Territory attacker, Territory defender, int attackerRoll, int defenderRoll) {
+
+    //Attack succeeds
+    if(attackerRoll > defenderRoll) {
+      defender.setOwnerIndex(attacker.getOwnerIndex());
+      defender.setUnits(attacker.getUnits()-1);
+      attacker.setUnits(1);
+    }
     
-   
+    //Attack fails
+    else
+      attacker.setUnits(1);
     
   }
   

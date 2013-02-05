@@ -25,24 +25,38 @@ class DisplayManager {
   //Call this ANY TIME a graphics change is required, otherwise the screen will not redraw; can be called from Ricorso
   public void graphicsChange() {  graphicsChange = true; }
   
+  //Only call when setting BattleManager's display.
+  public DisplayBattle getDisplayBattle() {  return db; }    
+  
   public void display() {
+    
+    if(db.isDisplaying())       //Checking this constantly for now - would look much better if checked once or twice per second
+      db.display();             //Battle display
     
     if(graphicsChange){         //ONLY CALL IF SOMETHING HAS CHANGED
     
       graphicsChange = false;   //Reset graphicsChanged before doing anything else
       
+      parent.background(150);   //Display background - this gets rid of unwanted stuff like old battle displays
+      
       dc.display();             //Central display
       dt.display();             //Topbar display
-      db.display();             //Battle display
+      
     }
   }
    
   public void setGame(Game myGame){  game = myGame; }
   
+  //Creates the display classes.
   public void setDisplays(Game myGame) {
     dc = new DisplayCentral(parent, myGame);
     dt = new DisplayTopbar(parent, myGame);
     db = new DisplayBattle(parent, myGame);
+  }
+  
+  //Has DisplayBattle show a battle.
+  public void showBattle(Territory attacker, Territory defender, int attackerRoll, int defenderRoll) {
+    db.showBattle(attacker, defender, attackerRoll, defenderRoll); 
   }
  
 }

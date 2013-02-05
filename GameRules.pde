@@ -5,9 +5,23 @@
  * 
  * GameRules is a static class that contains rules for the game.
  */
- 
- static class GameRules {
 
+import java.util.Random;
+ 
+static class GameRules {
+
+  public static int roll(Territory t) {
+    
+    Random r = new Random();
+    int total = 0;
+    
+    for(int i = 0; i  < t.getUnits(); i++) {
+       total += r.nextInt(6) + 1;
+    }
+    
+    return total;
+  }
+   
   //Gets the number of reinforcements the player would currently receive.
   public static int getReinforcements(Player player, GameLevel gameLevel) {
     
