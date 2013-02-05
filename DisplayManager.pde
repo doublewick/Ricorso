@@ -47,11 +47,11 @@ class DisplayManager {
    
   public void setGame(Game myGame){  game = myGame; }
   
-  //Creates the display classes.
-  public void setDisplays(Game myGame) {
-    dc = new DisplayCentral(parent, myGame);
-    dt = new DisplayTopbar(parent, myGame);
-    db = new DisplayBattle(parent, myGame);
+  //Creates the display classes. Must be called after setGame.
+  public void createDisplays() {
+    dc = new DisplayCentral(parent, game);
+    dt = new DisplayTopbar(parent, game);
+    db = new DisplayBattle(parent, game);
   }
   
   //Has DisplayBattle show a battle.

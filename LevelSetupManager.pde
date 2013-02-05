@@ -38,15 +38,18 @@ class LevelSetupManager {
   private void createTerritories(Board board) {    
     
     Territory[][] territories = board.getTerritories();
+    
     //Creates Territories in the territories array, assigning each a position and size as they are instantiated.
    
     for(int i = 0; i < board.getBoardWidth(); i++){
-    for(int j = 0; j < board.getBoardHeight(); j++){
-      territories[i][j] = new Territory(parent,
-        DisplayCentral.BOARD_START_X + (i * DisplayCentral.TERRITORY_WIDTH) + ((j % 2) * DisplayCentral.TERRITORY_WIDTH / 2),       //x
-        DisplayCentral.BOARD_START_Y + (j * DisplayCentral.TERRITORY_HEIGHT),                                                       //y
-        DisplayCentral.TERRITORY_WIDTH,                                                                                             //width
-        DisplayCentral.TERRITORY_HEIGHT);                                                                                           //height       
+      for(int j = 0; j < board.getBoardHeight(); j++){
+        territories[i][j] = new Territory(parent,
+          i,                                                                                                                          //gridY
+          j,                                                                                                                          //gridX
+          DisplayCentral.BOARD_START_X + (i * DisplayCentral.TERRITORY_WIDTH) + ((j % 2) * DisplayCentral.TERRITORY_WIDTH / 2),       //displayX
+          DisplayCentral.BOARD_START_Y + (j * DisplayCentral.TERRITORY_HEIGHT),                                                       //displayY
+          DisplayCentral.TERRITORY_WIDTH,                                                                                             //width
+          DisplayCentral.TERRITORY_HEIGHT);                                                                                           //height       
       }
     } 
   }

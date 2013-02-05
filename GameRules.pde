@@ -46,7 +46,44 @@ static class GameRules {
     if(t1 == null || t2 == null)  
       return false;
       
-    return true;
+    /**
+     * The following method assumes the "offset grid" pattern currently in the prototype.
+     * Any change in that pattern will require a change to this method.
+     */
+     
+    //Check if t2 is in the same row as t1 and immediately to its left or right
+    
+    if( t2.gridY == t1.gridY &&
+       (t2.gridX == t1.gridX + 1 ||
+        t2.gridX == t1.gridX - 1)){
+         return true;
+    }
+         
+    //Check if t1 is one row up or down
+    if( t2.gridY == t1.gridY + 1 ||
+        t2.gridY == t1.gridY - 1) {
+           
+      //If so, need to check adjacency differently in even- and odd-numbered rows.
+      if(t1.gridY % 2 == 0) {
+       
+        //In even-numbered rows, t2's x needs to be equal to or 1 less than t1's x
+        if( t2.gridX == t1.gridX ||
+            t2.gridX == t1.gridX - 1) {
+              return true;
+        }
+      }
+      
+      else {
+        
+        //In odd-numbered rows, t2's x needs to be equal to or 1 more than t1's x
+        if( t2.gridX == t1.gridX ||
+            t2.gridX == t1.gridX + 1) {
+              return true;
+        }         
+      } 
+    }
+        
+    return false;
     
   }
   

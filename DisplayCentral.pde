@@ -64,13 +64,13 @@ class DisplayCentral {
       parent.fill(game.getCurrentLevel().getPlayers().get(t.getOwnerIndex()).getColor().getRGB());
     
     //Draw the territory as a rectangle
-    parent.rect(t.x,t.y,t.width,t.height); 
+    parent.rect(t.displayX,t.displayY,t.width,t.height); 
     
     //Show the territory's units - just prints a number for now
     parent.textFont(unitFont);
     parent.fill(0);
     parent.textAlign(parent.CORNER);
-    parent.text(t.getUnits(), t.x + UNIT_OFFSET_X, t.y + UNIT_OFFSET_Y);
+    parent.text(t.getUnits(), t.displayX + UNIT_OFFSET_X, t.displayY + UNIT_OFFSET_Y);
     
   }
    

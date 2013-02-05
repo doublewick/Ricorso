@@ -23,7 +23,6 @@ class Board {
     boardHeight = myBoardHeight;
     
     territories = new Territory[boardWidth][boardHeight];
-
   }
   
   public int getBoardWidth(){  return boardWidth; }

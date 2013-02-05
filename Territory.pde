@@ -10,20 +10,27 @@ class Territory {
   
   private Ricorso parent;
   
-  public int x;
-  public int y;
-  public int width;
-  public int height;
+  public int gridX;          //The x value in the grid.
+  public int gridY;          //The y value in the grid.
+  
+  public int displayX;       //The x value where this Territory will be drawn. NOT its x value in the grid.
+  public int displayY;       //The y value where this Territory will be drawn. NOT its x value in the grid.
+  public int width;          //The width of the Territory when drawn.
+  public int height;         //The height of the Territory when drawn.
   
   private int ownerIndex;    //The index of the player who owns this Territory
-  private int units;        //The number of units in this Territory
+  private int units;         //The number of units in this Territory
   
   private boolean selected;  //Whether the Territory has been clicked on by its owner
    
-  public Territory(Ricorso p, int myX, int myY, int myWidth, int myHeight) {
+  public Territory(Ricorso p, int myGridX, int myGridY, int myDisplayX, int myDisplayY, int myWidth, int myHeight) {
       parent = p;
-      x = myX;
-      y = myY;
+      
+      gridX = myGridX;
+      gridY = myGridY;
+      
+      displayX = myDisplayX;
+      displayY = myDisplayY;
       width = myWidth;
       height = myHeight;
       

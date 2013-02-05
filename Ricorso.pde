@@ -28,11 +28,11 @@
     game = new Game(this);
     game.startGame();
     
-    //Creates a DisplayManager, passes it the Game, and has it set up the other displays
+    //Creates a DisplayManager, passes it the Game, and has it create the displays
     
     dm = new DisplayManager(this);
     dm.setGame(game);
-    dm.setDisplays(game);
+    dm.createDisplays();
             
     //Creates an InputManager and passes it the Game, the DisplayManager, and the BattleManager
     

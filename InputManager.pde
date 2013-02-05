@@ -41,7 +41,7 @@ class InputManager {
         
         Territory t = game.getCurrentBoard().getTerritories()[i][j];
         
-        if(mouseOverlap(t.x,t.y,t.width,t.height))
+        if(mouseOverlap(t.displayX,t.displayY,t.width,t.height))
           return t;
       } 
     }
