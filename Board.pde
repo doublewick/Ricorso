@@ -3,7 +3,7 @@
  * Joshua Raab
  * Jan 30, 2013
  * 
- * Board contains an array of Territories. 
+ * Board contains an array of Territories with a specified width and height.
  */
 
 import java.util.Random;
@@ -12,7 +12,7 @@ class Board {
 
   private Ricorso parent;
   
-  public Territory[][] territories;
+  private Territory[][] territories;
   
   private int boardWidth;
   private int boardHeight;
@@ -23,21 +23,12 @@ class Board {
     boardHeight = myBoardHeight;
     
     territories = new Territory[boardWidth][boardHeight];
-    
-    for(int i = 0; i < boardWidth; i++){
-      for(int j = 0; j < boardHeight; j++){
-        territories[i][j] = new Territory(parent,
-          DisplayManager.BOARD_START_X + (i * DisplayManager.TERRITORY_WIDTH),       //x
-          DisplayManager.BOARD_START_Y + (j * DisplayManager.TERRITORY_HEIGHT),      //y
-          DisplayManager.TERRITORY_WIDTH,                                            //width
-          DisplayManager.TERRITORY_HEIGHT);                                         //height
-          
-      }
-    }
- }
+  }
   
   public int getBoardWidth(){  return boardWidth; }
   
   public int getBoardHeight(){  return boardHeight; }
   
+  public Territory[][] getTerritories() {  return territories; }
+
 }

@@ -6,39 +6,57 @@
  * DisplayManager handles display.
  */
  
-class DisplayManager extends HObject {
-
-  final static int TERRITORY_WIDTH = 50;     //The width of a given Territory (assuming they are rectangles)
-  final static int TERRITORY_HEIGHT = 50;    //The height of a given Territory (assuming they are rectangles)
-  
-  final static int BOARD_START_X = 50;       //The x value of the top left corner of the top left Territory
-  final static int BOARD_START_Y = 100;      //The x value of the top left corner of the top left Territory
+class DisplayManager {
 
   private Ricorso parent;
   
+  private boolean graphicsChange;            //Only redraw the screen if something has changed
+  
   private Game game;
+  private DisplayCentral dc;
+  private DisplayTopbar dt;
+  private DisplayBattle db;
   
   public DisplayManager(Ricorso p) {
-   parent = p;
+    parent = p;
+    graphicsChange = true;      //Initialize to true so the screen draws once
   }
+  
+  //Call this ANY TIME a graphics change is required, otherwise the screen will not redraw; can be called from Ricorso
+  public void graphicsChange() {  graphicsChange = true; }
+  
+  //Only call when setting BattleManager's display.
+  public DisplayBattle getDisplayBattle() {  return db; }    
   
   public void display() {
-    parent.background(250);
-    game.getCurrentLevel().draw();
-    displayTerritories(game.getCurrentBoard()); 
-    //[display topbar]
-  }
-   
-  public void setGame(Game myGame){  game = myGame; }  
-
-  //Displays all the Territories on the current board.
-  private void displayTerritories(Board currentBoard) {
     
-    for(int i = 0; i < currentBoard.getBoardWidth(); i++) {
-      for(int j = 0; j < currentBoard.getBoardHeight(); j++) {
-        currentBoard.territories[i][j].draw();
-      } 
+    if(db.isDisplaying())       //Checking this constantly for now - would look much better if checked once or twice per second
+      db.display();             //Battle display
+    
+    if(graphicsChange){         //ONLY CALL IF SOMETHING HAS CHANGED
+    
+      graphicsChange = false;   //Reset graphicsChanged before doing anything else
+      
+      parent.background(150);   //Display background - this gets rid of unwanted stuff like old battle displays
+      
+      dc.display();             //Central display
+      dt.display();             //Topbar display
+      
     }
   }
+   
+  public void setGame(Game myGame){  game = myGame; }
   
- }
+  //Creates the display classes. Must be called after setGame.
+  public void createDisplays() {
+    dc = new DisplayCentral(parent, game);
+    dt = new DisplayTopbar(parent, game);
+    db = new DisplayBattle(parent, game);
+  }
+  
+  //Has DisplayBattle show a battle.
+  public void showBattle(Territory attacker, Territory defender, int attackerRoll, int defenderRoll) {
+    db.showBattle(attacker, defender, attackerRoll, defenderRoll); 
+  }
+ 
+}
